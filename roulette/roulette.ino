@@ -20,11 +20,11 @@ void loop() {
 void drawRouletteWheel() {
   for (int i = 0; i < LED_COUNT; i++) {
     if (i == 0) {
-      strip.setPixelColor(i, strip.Color(0, 255, 0));  // Green for zero
+      strip.setPixelColor(i, strip.Color(0, 50, 0));  // Green for zero
     } else if (i % 2 == 0) {
-      strip.setPixelColor(i, strip.Color(100, 0, 0));  // Red
+      strip.setPixelColor(i, strip.Color(50, 0, 0));  // Red
     } else {
-      strip.setPixelColor(i, strip.Color(0, 0, 0));  // Black
+      strip.setPixelColor(i, strip.Color(0, 0, 25));  // Black
     }
   }
   strip.show();
