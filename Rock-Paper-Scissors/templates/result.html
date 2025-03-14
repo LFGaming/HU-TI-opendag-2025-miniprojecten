@@ -7,14 +7,27 @@
     <style>
         body {
             background-color: #4B0082;  /* Deep Purple */
-            color: white;               /* White text for contrast */
-            font-family: Arial, sans-serif; /* Font style */
-            text-align: center;         /* Center align content */
+            color: white;               
+            font-family: Arial, sans-serif;
+            text-align: center;         
             padding: 20px;
         }
 
         h1 {
             font-size: 3em;
+        }
+
+        .choices {
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            gap: 50px;
+            margin: 20px 0;
+        }
+
+        .choice img {
+            width: 150px;  /* Adjust size as needed */
+            height: 150px;
         }
 
         p {
@@ -23,17 +36,17 @@
         }
 
         a {
-            color: #FFD700;  /* Gold color for the "Play Again" link */
+            color: #FFD700;  
             font-size: 1.2em;
             text-decoration: none;
         }
 
         a:hover {
-            color: #FF6347; /* Tomato red on hover */
+            color: #FF6347;
         }
 
         button {
-            background-color: #6A0DAD;  /* Purple color for the button */
+            background-color: #6A0DAD;
             color: white;
             border: none;
             padding: 10px 20px;
@@ -44,18 +57,31 @@
         }
 
         button:hover {
-            background-color: #8A2BE2; /* Lighter purple on hover */
+            background-color: #8A2BE2;
         }
     </style>
 </head>
 <body>
     <h1>Rock, Paper, Scissors - Result</h1>
-    <p>Your choice: {{ user_choice }}</p>
-    <p>Server's choice: {{ server_choice }}</p>
-    <p>Result: {{ result }}</p>
-    <br>
+
+    <div class="choices">
+        <!-- User's choice -->
+        <div class="choice">
+            <p>You chose:</p>
+            <img src="{{ url_for('static', filename=user_choice + '.png') }}" alt="{{ user_choice }}">
+        </div>
+
+        <!-- Server's choice -->
+        <div class="choice">
+            <p>Server chose:</p>
+            <img src="{{ url_for('static', filename=server_choice + '.png') }}" alt="{{ server_choice }}">
+        </div>
+    </div>
+
+    <p><strong>{{ result }}</strong></p>
+
     <form action="/" method="GET">
-        <button type="submit" class="btn">Play Again</button>
+        <button type="submit">Play Again</button>
     </form>
 </body>
 </html>
