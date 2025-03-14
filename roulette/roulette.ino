@@ -6,7 +6,7 @@
 #define Red 5
 #define Blue 6
 #define Plus 9
-#define Min 8
+#define Min 11
 #define OK 10
 
 Adafruit_NeoPixel strip(LED_COUNT, LED_PIN, NEO_GRB + NEO_KHZ800);
@@ -71,11 +71,11 @@ void spinRoulette() {
 
   // Determine final color
   if (position == 0) {
-    finalColor = GREEN;
+    finalColor = Green;
   } else if (position % 2 == 0) {
-    finalColor = BLUE;
+    finalColor = Blue;
   } else {
-    finalColor = RED;
+    finalColor = Red;
   }
 }
 
@@ -131,14 +131,29 @@ void updateLED(){
   }
 }
 
+void rainbowCycle(int wait) {
+  for (int j = 0; j < 256; j++) { // Cycle through the color wheel
+    for (int i = 0; i < LED_COUNT; i++) {
+      int pixelHue = (i * 256 / LED_COUNT + j) & 255; // Spread colors evenly
+      strip.setPixelColor(i, strip.gamma32(strip.ColorHSV(pixelHue * 65536L / 256)));
+    }
+    strip.show();
+    delay(wait);
+  }
+}
+
 void loop() {
   ChooseYourCharacter();
   spinRoulette();
+  Serial.println(colors[colorIndex]);
+  if (finalColor == colors[colorIndex]){
+    rainbowCycle(50);
+  }
   
   // Print result to serial monitor
-  if (finalColor == GREEN) {
+  if (finalColor == Green) {
     Serial.println("Ball landed on GREEN!");
-  } else if (finalColor == RED) {
+  } else if (finalColor == Red) {
     Serial.println("Ball landed on RED!");
   } else {
     Serial.println("Ball landed on BLUE!");
