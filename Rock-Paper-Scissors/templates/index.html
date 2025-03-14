@@ -7,9 +7,9 @@
     <style>
         body {
             background-color: #4B0082;  /* Deep Purple */
-            color: white;               /* White text for contrast */
-            font-family: Arial, sans-serif; /* Font style */
-            text-align: center;         /* Center align content */
+            color: white;
+            font-family: Arial, sans-serif;
+            text-align: center;
             padding: 20px;
         }
 
@@ -17,19 +17,37 @@
             font-size: 3em;
         }
 
+        .choices {
+            display: flex;
+            justify-content: center;
+            gap: 20px;
+            margin: 20px 0;
+        }
+
         .choice {
             display: inline-block;
-            margin: 10px;
+            padding: 10px;
             cursor: pointer;
+            border-radius: 10px;
+            transition: background-color 0.3s ease;
         }
 
         .choice img {
-            width: 100px;
-            height: 100px;
+            width: 120px;
+            height: 120px;
+        }
+
+        .choice:hover {
+            background-color: #8A2BE2;
+        }
+
+        /* Geselecteerde keuze blijft ingekleurd */
+        .selected {
+            background-color: #8A2BE2 !important;
         }
 
         button {
-            background-color: #6A0DAD;  /* Purple color for the button */
+            background-color: #6A0DAD;
             color: white;
             border: none;
             padding: 10px 20px;
@@ -40,32 +58,53 @@
         }
 
         button:hover {
-            background-color: #8A2BE2; /* Lighter purple on hover */
+            background-color: #8A2BE2;
         }
     </style>
 </head>
 <body>
     <h1>Rock, Paper, Scissors</h1>
+    
     <form action="/play" method="POST">
-        <!-- Rock Choice -->
-        <label class="choice">
-            <input type="radio" name="choice" value="rock" required style="display:none">
-            <img src="static/rock.png" alt="Rock">
-        </label>
-        
-        <!-- Paper Choice -->
-        <label class="choice">
-            <input type="radio" name="choice" value="paper" required style="display:none">
-            <img src="static/paper.png" alt="Paper">
-        </label>
-        
-        <!-- Scissors Choice -->
-        <label class="choice">
-            <input type="radio" name="choice" value="scissors" required style="display:none">
-            <img src="static/scissors.png" alt="Scissors">
-        </label>
-        <br>
+        <div class="choices">
+            <!-- Rock -->
+            <label class="choice">
+                <input type="radio" name="choice" value="rock" required hidden>
+                <img src="static/rock.png" alt="Rock">
+            </label>
+            
+            <!-- Paper -->
+            <label class="choice">
+                <input type="radio" name="choice" value="paper" required hidden>
+                <img src="static/paper.png" alt="Paper">
+            </label>
+            
+            <!-- Scissors -->
+            <label class="choice">
+                <input type="radio" name="choice" value="scissors" required hidden>
+                <img src="static/scissors.png" alt="Scissors">
+            </label>
+        </div>
         <button type="submit">Play</button>
     </form>
+
+    <script>
+        document.addEventListener("DOMContentLoaded", function() {
+            const choices = document.querySelectorAll(".choice");
+
+            choices.forEach(choice => {
+                choice.addEventListener("click", function() {
+                    // Verwijder 'selected' klasse van alle keuzes
+                    choices.forEach(c => c.classList.remove("selected"));
+
+                    // Voeg 'selected' toe aan de aangeklikte optie
+                    this.classList.add("selected");
+
+                    // Zorg ervoor dat de input daadwerkelijk geselecteerd wordt
+                    this.querySelector("input").checked = true;
+                });
+            });
+        });
+    </script>
 </body>
 </html>
