@@ -1,0 +1,71 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Rock, Paper, Scissors</title>
+    <style>
+        body {
+            background-color: #4B0082;  /* Deep Purple */
+            color: white;               /* White text for contrast */
+            font-family: Arial, sans-serif; /* Font style */
+            text-align: center;         /* Center align content */
+            padding: 20px;
+        }
+
+        h1 {
+            font-size: 3em;
+        }
+
+        .choice {
+            display: inline-block;
+            margin: 10px;
+            cursor: pointer;
+        }
+
+        .choice img {
+            width: 100px;
+            height: 100px;
+        }
+
+        button {
+            background-color: #6A0DAD;  /* Purple color for the button */
+            color: white;
+            border: none;
+            padding: 10px 20px;
+            font-size: 1.2em;
+            cursor: pointer;
+            margin-top: 20px;
+            border-radius: 5px;
+        }
+
+        button:hover {
+            background-color: #8A2BE2; /* Lighter purple on hover */
+        }
+    </style>
+</head>
+<body>
+    <h1>Rock, Paper, Scissors</h1>
+    <form action="/play" method="POST">
+        <!-- Rock Choice -->
+        <label class="choice">
+            <input type="radio" name="choice" value="rock" required style="display:none">
+            <img src="static/rock.png" alt="Rock">
+        </label>
+        
+        <!-- Paper Choice -->
+        <label class="choice">
+            <input type="radio" name="choice" value="paper" required style="display:none">
+            <img src="static/paper.png" alt="Paper">
+        </label>
+        
+        <!-- Scissors Choice -->
+        <label class="choice">
+            <input type="radio" name="choice" value="scissors" required style="display:none">
+            <img src="static/scissors.png" alt="Scissors">
+        </label>
+        <br>
+        <button type="submit">Play</button>
+    </form>
+</body>
+</html>

@@ -1,0 +1,61 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Game Result</title>
+    <style>
+        body {
+            background-color: #4B0082;  /* Deep Purple */
+            color: white;               /* White text for contrast */
+            font-family: Arial, sans-serif; /* Font style */
+            text-align: center;         /* Center align content */
+            padding: 20px;
+        }
+
+        h1 {
+            font-size: 3em;
+        }
+
+        p {
+            font-size: 1.5em;
+            margin: 20px 0;
+        }
+
+        a {
+            color: #FFD700;  /* Gold color for the "Play Again" link */
+            font-size: 1.2em;
+            text-decoration: none;
+        }
+
+        a:hover {
+            color: #FF6347; /* Tomato red on hover */
+        }
+
+        button {
+            background-color: #6A0DAD;  /* Purple color for the button */
+            color: white;
+            border: none;
+            padding: 10px 20px;
+            font-size: 1.2em;
+            cursor: pointer;
+            margin-top: 20px;
+            border-radius: 5px;
+        }
+
+        button:hover {
+            background-color: #8A2BE2; /* Lighter purple on hover */
+        }
+    </style>
+</head>
+<body>
+    <h1>Rock, Paper, Scissors - Result</h1>
+    <p>Your choice: {{ user_choice }}</p>
+    <p>Server's choice: {{ server_choice }}</p>
+    <p>Result: {{ result }}</p>
+    <br>
+    <form action="/" method="GET">
+        <button type="submit" class="btn">Play Again</button>
+    </form>
+</body>
+</html>
