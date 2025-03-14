@@ -5,7 +5,12 @@
 
 Adafruit_NeoPixel strip(LED_COUNT, LED_PIN, NEO_GRB + NEO_KHZ800);
 
+// Possible outcomes
+enum ColorResult { GREEN, RED, BLUE };  
+ColorResult finalColor;
+
 void setup() {
+  Serial.begin(9600);  // Initialize serial monitor
   strip.begin();
   strip.show();  // Initialize all pixels to 'off'
   drawRouletteWheel();
@@ -14,7 +19,17 @@ void setup() {
 
 void loop() {
   spinRoulette();
-  delay(2000);  // Short pause before the next spin
+  
+  // Print result to serial monitor
+  if (finalColor == GREEN) {
+    Serial.println("Ball landed on GREEN!");
+  } else if (finalColor == RED) {
+    Serial.println("Ball landed on RED!");
+  } else {
+    Serial.println("Ball landed on BLUE!");
+  }
+
+  delay(2000);  // Short pause before next spin
 }
 
 void drawRouletteWheel() {
@@ -47,9 +62,18 @@ void spinRoulette() {
     delay(speed);
     position = (position + 1) % LED_COUNT;  // Move ball to next LED
 
-    // Apply **exponential slowdown** for a smoother stop
+    // Apply exponential slowdown for a smoother stop
     if (step > slowdownStart) {
-      speed += speed / 12;  // Gradually increase delay time
+      speed += speed / 12;  
     }
+  }
+
+  // Determine final color
+  if (position == 0) {
+    finalColor = GREEN;
+  } else if (position % 2 == 0) {
+    finalColor = RED;
+  } else {
+    finalColor = BLUE;
   }
 }
